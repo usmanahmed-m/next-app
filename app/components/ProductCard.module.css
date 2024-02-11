@@ -1,0 +1,11 @@
+.card {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+
+/* follow naming convention */
+
+/* In css module we can't use hyphen with name like .card-container. Use camel case notation .cardContainer */
+
+/* follow .card class in browser using inspect.
+.card class will be change as next is using postcss.config.js to transform and generate unique names that don't clash */
