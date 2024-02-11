@@ -11,3 +11,11 @@ export default function Home() {
     </main>
   );
 }
+
+// There are some special Files next js router look for:
+// - pages.tsx - To make a route publically accessible we have to put page file in that folder
+// - layout.tsx - Used for defining common layout for pages
+// - loading.tsx - file for showing loading UIs
+// - route.tsx - for creating APIs
+// - not-found.tsx - for showing custom errors
+// - error.tsx - for showing general custom error pages
