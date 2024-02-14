@@ -3,10 +3,19 @@ import React from 'react';
 // props are different here.
 type Props = {
   params: { slug: string[] };
+  searchParams: { sortOrder: string };
+  // we can access querystring parameters from search params
 };
 
-const ProductPage = ({ params: { slug } }: Props) => {
-  return <div>ProductPage {slug}</div>;
+const ProductPage = ({
+  params: { slug },
+  searchParams: { sortOrder },
+}: Props) => {
+  return (
+    <div>
+      ProductPage {slug} {sortOrder}
+    </div>
+  );
 };
 
 export default ProductPage;
