@@ -21,6 +21,7 @@ type Props = {
 //  //   const res = await fetch('https://jsonplaceholder.typicode.com/users', {cache: 'no-store'});
 // Cache behavior will only work in fetch fn. If using axios it won't work
 // cache: 'no-store', // next by default cache data. To negate this behavior we pass 2nd arg to fetch as object
+// ex: {/* <p>{new Date().toLocaleTimeString()}</p> */}
 // next: { revalidate: 10 }, // with next revalidate, next will update data after 10s if we have data which changes frequently.
 
 const UserTable = async ({ sortOrder }: Props) => {
