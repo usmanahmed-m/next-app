@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "./NavBar";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,11 @@ export default function RootLayout({
     >
       <body className={inter.className}>
         <NavBar />
-        <main className='p-5'>{children}</main>
+        <main className='p-5'>
+          {/* To automatically show loading message while navigating through pages we can wrap children in root layout in suspense component. For complex and heavy pages this provide better user experience. This is one way. we can create special loading file in next js */}
+          {/* <Suspense fallback={<p>Loading...</p>}>{children}</Suspense> */}
+          {children}
+        </main>
       </body>
     </html>
   );
