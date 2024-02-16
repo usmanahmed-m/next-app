@@ -1,11 +1,15 @@
-import Link from 'next/link';
-import ProductCard from './components/ProductCard';
+import Link from "next/link";
+import ProductCard from "./components/ProductCard";
 
 export default function Home() {
   return (
     <main>
       <h1>Hello World</h1>
-      {/* <a href='/users'>Users</a>  Link component instead of anchor tag for navigation. */}
+      {/* <a href='/users'>Users</a>  Link component instead of anchor tag for navigation.
+      Link only downloads the content of target page
+      Link Pre-fetches links that are in the viewport. Works in production mode.
+      Caches pages on the client
+      With full page reload client cache is cleared */}
       <Link href='/users'>Users</Link>
       <ProductCard />
     </main>
