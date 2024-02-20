@@ -1,0 +1,7 @@
+api folder not required but common convention to follow
+in a given folder or url segment we can have either page.tsx file or route.tsx file but not both.
+to show markup or html to user we use page file
+to handle http requests we should add route file
+
+in route.tsx file we create one or more route handlers
+A route handler is a function that handles http request
