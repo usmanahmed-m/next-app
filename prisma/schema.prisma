@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// model name uses pascal case
+// A model have properties or fields
+// in above line a users have id field, type of this field is INT, we can make it optional by putting ? mark like 'INT?', we can add more attributes to id field like its @id means this is id-filed which uniquely indentifies each users. Each model can have only 1 @id field. with @default() we can define default values and by passing autoincrement(build-in function) function we let db to generate new id for us.
+
+// in model use 1st column is fields 2nd is to define types and third attributes
+
+// model User {
+//   id Int @id @default(autoincrement())
+//   email String @unique
+//   name String
+//   followers Int @default(0)
+//   isActive Boolean @default(true)
+// }
+
+// to format above data type 'npx prisma format' and it will format code shown below
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String
+  followers    Int      @default(0)
+  isActive     Boolean  @default(true)
+  registeredAt DateTime @default(now())
+}
+
+// As we define or change our model we have to create migrations. These migrations we keep our database schema and prisma schema in sync
+// to do this run 'npx prisma migrate dev' and after provide name for your migration lie initials like commit in git to be meaningful
+// We can see a new folder named migrations under prisma in root directory of our project. migration folder name starts with datetime stamp and with the name we provided. under migration folder we find migration.sql file and in that file we will find instructions for creating table(sql commands)
+// Also with in our database we will find _prisma_migrations and its private and have implementation details. We can also find timestamp and inital migration there and it's only for prisma. We can see all migrations from database there
