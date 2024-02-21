@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import schema from "../schema";
 
 // type Props = {
 //   params: { id: number };
@@ -28,9 +29,10 @@ export async function PUT(
 ) {
   //  validate request body
   const body = await request.json();
-  if (!body.name)
+  const validation = schema.safeParse(body);
+  if (!validation.success)
     // if invalid, return 400
-    return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    return NextResponse.json(validation.error.errors, { status: 400 });
   // fetch user with given id
   // if user does not exit return 404
   if (params.id > 10)
