@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import schema from "../schema";
+import prisma from "../../../../prisma/client";
 
 // type Props = {
 //   params: { id: number };
@@ -7,16 +8,19 @@ import schema from "../schema";
 
 // if we destructure props and define type while destructuring, we don't need to define type of Props above
 
-export function GET(
+export async function GET(
   request: NextRequest,
-  { params }: { params: { id: number } },
+  { params }: { params: { id: string } },
 ) {
   // Fetch data from database
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(params.id) },
+  });
   // if not found, return 404 error
-  if (params.id > 10)
+  if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   // Else return data
-  return NextResponse.json({ id: 1, name: "Usman" });
+  return NextResponse.json(user);
 }
 
 // PUT vs PATCH
@@ -25,7 +29,7 @@ export function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: number } },
+  { params }: { params: { id: string } },
 ) {
   //  validate request body
   const body = await request.json();
@@ -34,24 +38,34 @@ export async function PUT(
     // if invalid, return 400
     return NextResponse.json(validation.error.errors, { status: 400 });
   // fetch user with given id
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(params.id) },
+  });
   // if user does not exit return 404
-  if (params.id > 10)
+  if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
-
   // else update the user
+  const UpdatedUser = await prisma.user.update({
+    where: { id: user.id },
+    data: { name: body.name, email: body.email },
+  });
   // return the updated user
-  return NextResponse.json({ id: 1, name: body.name });
+  return NextResponse.json(UpdatedUser);
 }
 
-export function DELETE(
+export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: number } },
+  { params }: { params: { id: string } },
 ) {
   // Fetch user from db
+  const user = await prisma.user.findUnique({
+    where: { id: parseInt(params.id) },
+  });
   // if not found, return 404
-  if (params.id > 10)
+  if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   // Delete user
+  await prisma.user.delete({ where: { id: user.id } });
   // return 200
   return NextResponse.json({});
 }
