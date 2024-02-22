@@ -38,6 +38,12 @@ model User {
   registeredAt DateTime @default(now())
 }
 
+model Product {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  price Float
+}
+
 // As we define or change our model we have to create migrations. These migrations we keep our database schema and prisma schema in sync
 // to do this run 'npx prisma migrate dev' and after provide name for your migration lie initials like commit in git to be meaningful
 // We can see a new folder named migrations under prisma in root directory of our project. migration folder name starts with datetime stamp and with the name we provided. under migration folder we find migration.sql file and in that file we will find instructions for creating table(sql commands)

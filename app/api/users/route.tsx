@@ -5,7 +5,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import schema from "./schema";
-import prisma from "../../../prisma/client";
+import prisma from "@/prisma/client";
 
 export async function GET(request: NextRequest) {
   // If we remove request from params next js will cache data and next time we hit this end point next js will show cache data. To prevent caching we have to add {request: NextRequest} object

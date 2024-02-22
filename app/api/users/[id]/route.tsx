@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import schema from "../schema";
-import prisma from "../../../../prisma/client";
+import prisma from "@/prisma/client";
 
 // type Props = {
 //   params: { id: number };
@@ -45,12 +45,12 @@ export async function PUT(
   if (!user)
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   // else update the user
-  const UpdatedUser = await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: { id: user.id },
     data: { name: body.name, email: body.email },
   });
   // return the updated user
-  return NextResponse.json(UpdatedUser);
+  return NextResponse.json(updatedUser);
 }
 
 export async function DELETE(
