@@ -1,0 +1,11 @@
+ for authenication in next js install next-auth package "npm i next-auth"
+ NextAuth is becoming Auth.js in future so look for documentation. Also look documentation for 13.* version documentation for next auth as it use new app router
+ Any route with /auth we are going to handler it here
+ after creating route.ts we create 2 env variables
+ after defining NEXTAUTH_URL and NEXTAUTH_SECRET we have to configure a provider
+
+
+ When a user logs in next auth create an authenication session for that user, by default that session is represented by JWT which can be found under cookies in browser. Under cookies select ur site and there a cookie by name next-auth.session-token
+
+ Cookies: Cookies are small pieces information that are exchange between client and server with each request
+ Check token folder.
