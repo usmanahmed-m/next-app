@@ -1,10 +1,13 @@
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   return (
     <main>
-      <h1>Hello World</h1>
+      <h1>Hello {session && <span>{session.user!.name}</span>} </h1>
       {/* <a href='/users'>Users</a>  Link component instead of anchor tag for navigation.
       Link only downloads the content of target page
       Link Pre-fetches links that are in the viewport. Works in production mode.

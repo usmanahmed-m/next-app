@@ -2,9 +2,7 @@ import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import { custom } from "openid-client";
 
-// Follow videos for setting up with google OAuth
-// we call next auth and get a handler function
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       // typescript doesn't know the value of clientId is string or undefined so by putting ! exclamanation mark at the end we are telling ts that we have value stored and is definitely available
@@ -12,7 +10,11 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-});
+};
+
+// Follow videos for setting up with google OAuth
+// we call next auth and get a handler function
+const handler = NextAuth(authOptions);
 
 // If connection is slow and we are logging in with google we get error
 // https://next-auth.js.org/errors#oauth_callback_error outgoing request timed out after 3500ms
